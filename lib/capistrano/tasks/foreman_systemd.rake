@@ -64,10 +64,8 @@ namespace :foreman_systemd do
         options[:user] = fetch(:foreman_systemd_user) if fetch(:foreman_systemd_user)
 
         as "root" do
-          within release_path do
             execute :bundle, 'exec foreman export', fetch(:foreman_systemd_export_format), fetch(:foreman_systemd_export_path),
                     options.map{ |k, v| "--#{k}='#{v}'" }, fetch(:foreman_systemd_flags)
-          end
         end
       end
     end
